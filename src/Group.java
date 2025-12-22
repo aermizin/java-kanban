@@ -7,6 +7,15 @@ public class Group {
     //длительность (в минутах)
     private int duration;
 
+    @Override
+    public String toString() {
+        return "Group{" +
+                "title='" + title + '\'' +
+                ", age=" + age +
+                ", duration=" + duration +
+                '}';
+    }
+
     public Group(String title, Age age, int duration) {
         this.title = title;
         this.age = age;

@@ -13,6 +13,15 @@ public class Coach {
         this.middleName = middleName;
     }
 
+    @Override
+    public String toString() {
+        return "Coach{" +
+                "surname='" + surname + '\'' +
+                ", name='" + name + '\'' +
+                ", middleName='" + middleName + '\'' +
+                '}';
+    }
+
     public String getSurname() {
         return surname;
     }

@@ -4,7 +4,7 @@ public class Main {
         System.out.println("Поехали!");
 
 
-      /*  Timetable timetable = new Timetable();
+        Timetable timetable = new Timetable();
 
         Group group = new Group("Акробатика для детей", Age.CHILD, 60);
         Coach coach = new Coach("Васильев", "Николай", "Сергеевич");
@@ -39,7 +39,7 @@ public class Main {
 
         System.out.println(timetable.getTrainingSessionsForDayAndTime(DayOfWeek.SATURDAY,new TimeOfDay(16, 0)));
 
-        System.out.println(timetable.getCountByCoaches());*/
+        System.out.println(timetable.getCountByCoaches());
 
     }
 }
