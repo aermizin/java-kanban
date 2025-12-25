@@ -40,6 +40,7 @@ public class TrainingSession implements Comparable<TrainingSession> {
         if (daysComparison == 0) {
             return this.timeOfDay.compareTo(o.timeOfDay);
         }
+
         return daysComparison;
     }
 

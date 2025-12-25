@@ -40,7 +40,7 @@ public class Timetable {
         //как реализовать, тоже непонятно, но сложность должна быть О(1)
     }
 
-    public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
+    public List<TrainingSession> getTrainingSessionsForDayAndTime (DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
 
         TreeMap<TimeOfDay, List<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
 
@@ -50,6 +50,7 @@ public class Timetable {
         }
 
         List<TrainingSession> groupsAtTime = trainingSessionsForDay.get(timeOfDay);
+
         if (groupsAtTime == null) {
             System.out.println("В этот день " + dayOfWeek + " в это время " + timeOfDay + " отсутствуют тренировки.");
             return null;
@@ -80,6 +81,7 @@ public class Timetable {
         for (Map.Entry<Coach, Integer> entry : coachWeeklyTrainingsCount.entrySet()) {
             counterOfTrainings.add(new CounterOfTrainings(entry.getKey(), entry.getValue()));
         }
+
         Collections.sort(counterOfTrainings);
 
         return counterOfTrainings;
