@@ -40,6 +40,7 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
 
         return hourComparison;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
