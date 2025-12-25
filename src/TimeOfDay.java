@@ -2,9 +2,9 @@ import java.util.Objects;
 
 public class TimeOfDay implements Comparable<TimeOfDay> {
 
-    //часы (от 0 до 23)
+    // Часы (от 0 до 23)
     private int hours;
-    //минуты (от 0 до 59)
+    // Минуты (от 0 до 59)
     private int minutes;
 
     public TimeOfDay(int hours, int minutes) {
@@ -24,6 +24,8 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
                 '}';
     }
 
+
+
     public int getMinutes() {
         return minutes;
     }
@@ -40,8 +42,6 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
 
         return hourComparison;
     }
-
-
 
     @Override
     public boolean equals(Object obj) {
