@@ -32,10 +32,8 @@ public class TimeOfDay implements Comparable<TimeOfDay> {
 
     @Override
     public int compareTo(TimeOfDay other) {
-        // Сначала сравниваем часы
         int hourComparison = Integer.compare(this.hours, other.hours);
 
-        // Если часы равны, сравниваем минуты
         if (hourComparison == 0) {
             return Integer.compare(this.minutes, other.minutes);
         }

@@ -9,8 +9,8 @@ public class Timetable {
 
     private Map<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> timetable = new HashMap<>();
 
-    public void addNewTrainingSession (TrainingSession trainingSession) {
-        //сохраняем занятие в расписании
+    public void addNewTrainingSession(TrainingSession trainingSession) {
+
         TreeMap<TimeOfDay, List<TrainingSession>> timetableByDay = timetable.get(trainingSession.getDayOfWeek());
 
         if (timetableByDay == null) {
@@ -29,7 +29,6 @@ public class Timetable {
     }
 
     public TreeMap<TimeOfDay, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
-
         TreeMap<TimeOfDay, List<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
 
         if (trainingSessionsForDay == null) {
@@ -37,11 +36,9 @@ public class Timetable {
             return null;
         }
         return trainingSessionsForDay;
-        //как реализовать, тоже непонятно, но сложность должна быть О(1)
     }
 
-    public List<TrainingSession> getTrainingSessionsForDayAndTime (DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
-
+    public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         TreeMap<TimeOfDay, List<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
 
         if (trainingSessionsForDay == null) {
@@ -57,15 +54,12 @@ public class Timetable {
         }
 
         return groupsAtTime;
-        //как реализовать, тоже непонятно, но сложность должна быть О(1)
     }
 
     public List<CounterOfTrainings> getCountByCoaches() {
-
-        Map<Coach,Integer> coachWeeklyTrainingsCount = new HashMap<>();
+        Map<Coach, Integer> coachWeeklyTrainingsCount = new HashMap<>();
 
         for (Map.Entry<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> entry : timetable.entrySet()) {
-
             TreeMap<TimeOfDay, List<TrainingSession>> dailySessions = entry.getValue();
 
             for (List<TrainingSession> trainingSessions : dailySessions.values()) {
