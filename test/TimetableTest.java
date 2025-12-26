@@ -84,7 +84,7 @@ public class TimetableTest {
 
         TreeMap<TimeOfDay, List<TrainingSession>> sessionsOnMonday = timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY);
 
-        assertEquals(1, sessionsOnMonday.size(), "Должно вернутся одно занятие в понедельник.");
+        assertEquals(1, sessionsOnMonday.size(), "Должно вернуться одно занятие в понедельник.");
 
         TreeMap<TimeOfDay, List<TrainingSession>> sessionsOnTuesday = timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY);
 
@@ -120,11 +120,11 @@ public class TimetableTest {
 
         TreeMap<TimeOfDay, List<TrainingSession>> sessionsOnMonday = timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY);
 
-        assertEquals(1, sessionsOnMonday.size(), "Должно вернутся одно занятие в понедельник.");
+        assertEquals(1, sessionsOnMonday.size(), "Должно вернуться одно занятие в понедельник.");
 
         TreeMap<TimeOfDay, List<TrainingSession>> sessionsOnThursday = timetable.getTrainingSessionsForDay(DayOfWeek.THURSDAY);
 
-        assertEquals(2, sessionsOnThursday.size(), "Должно вернутся два занятие в четверг.");
+        assertEquals(2, sessionsOnThursday.size(), "Должно вернуться два занятие в четверг.");
 
         boolean correctTrainingOrder =
                 sessionsOnThursday.firstEntry().getKey().equals(new TimeOfDay(13, 0)) &&
@@ -153,7 +153,7 @@ public class TimetableTest {
         TreeMap<TimeOfDay, List<TrainingSession>> sessionsOnMonday =
                 timetable.getTrainingSessionsForDay(DayOfWeek.MONDAY);
 
-        assertEquals(1, sessionsOnMonday.size(), "Должно вернутся одно занятие в понедельник.");
+        assertEquals(1, sessionsOnMonday.size(), "Должно вернуться одно занятие в понедельник.");
 
         boolean correctTrainingOrder =
                 sessionsOnMonday.firstEntry().getKey().equals(new TimeOfDay(13, 0));
@@ -194,7 +194,7 @@ public class TimetableTest {
 
         List<CounterOfTrainings> counterOfTrainings = timetable.getCountByCoaches();
 
-        assertEquals(2,  counterOfTrainings.size(), "Должен вернутся список с двумя тренерами.");
+        assertEquals(2,  counterOfTrainings.size(), "Должен вернуться список с двумя тренерами.");
     }
 
     @Test
@@ -223,7 +223,7 @@ public class TimetableTest {
         timetable.addNewTrainingSession(adultTrainingSessionOnFriday);
         timetable.addNewTrainingSession(adultTrainingSessionOnSaturday);
 
-        Group teensGroup = new Group("Футбол для подростков", Age.ADULT, 90); // предполагая, что у подростков тоже возраст Adult
+        Group teensGroup = new Group("Футбол для подростков", Age.ADULT, 90);
         Coach teensCoach = new Coach("Смирнов", "Алексей", "Викторович");
         TrainingSession teenTrainingSessionOnSunday = new TrainingSession(teensGroup, teensCoach,
                 DayOfWeek.SUNDAY, new TimeOfDay(11, 0));
@@ -234,14 +234,14 @@ public class TimetableTest {
 
         assertEquals(childrenCoach, counterOfTrainings.get(0).getCoach(), "Первым должен быть тренер 'Васильев'.");
         assertEquals(3, counterOfTrainings.get(0).getNumberOfLessons(),
-                "Должно вернутся 3 тренировки для тренера 'Васильев'.");
+                "Должно вернуться 3 тренировки для тренера 'Васильев'.");
 
         assertEquals(adultsCoach, counterOfTrainings.get(1).getCoach(), "Вторым должен быть тренер 'Петров'.");
         assertEquals(2, counterOfTrainings.get(1).getNumberOfLessons(),
-                "Должно вернутся 2 тренировки для тренера 'Петров'.");
+                "Должно вернуться 2 тренировки для тренера 'Петров'.");
 
         assertEquals(teensCoach, counterOfTrainings.get(2).getCoach(), "Третьим должен быть тренер 'Смирнов'.");
         assertEquals(1, counterOfTrainings.get(2).getNumberOfLessons(),
-                "Должно вернутся 1 тренировка для тренера 'Смирнов'.");
+                "Должно вернуться 1 тренировка для тренера 'Смирнов'.");
     }
 }
