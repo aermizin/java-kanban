@@ -1,6 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.TreeSet;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -11,55 +11,49 @@ public class Timetable {
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
 
-        TreeMap<TimeOfDay, List<TrainingSession>> timetableByDay = timetable.get(trainingSession.getDayOfWeek());
+        DayOfWeek dayOfWeek = trainingSession.getDayOfWeek();
+        TimeOfDay timeOfDay = trainingSession.getTimeOfDay();
 
-        if (timetableByDay == null) {
-            timetableByDay = new TreeMap<>();
-            timetable.put(trainingSession.getDayOfWeek(), timetableByDay);
-        }
+        timetable.putIfAbsent(dayOfWeek, new TreeMap<>());
 
-        List<TrainingSession> sessionsAtTime = timetableByDay.get(trainingSession.getTimeOfDay());
+        timetable.get(dayOfWeek).putIfAbsent(timeOfDay, new ArrayList<>());
+        timetable.get(dayOfWeek).get(timeOfDay).add(trainingSession);
 
-        if (sessionsAtTime == null) {
-            sessionsAtTime = new ArrayList<>();
-            timetableByDay.put(trainingSession.getTimeOfDay(), sessionsAtTime);
-        }
-
-        sessionsAtTime.add(trainingSession);
     }
 
-    public TreeMap<TimeOfDay, List<TrainingSession>> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
-        TreeMap<TimeOfDay, List<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
+    public List<TrainingSession> getTrainingSessionsForDay(DayOfWeek dayOfWeek) {
 
-        if (trainingSessionsForDay == null) {
-            System.out.println("В этот день " + dayOfWeek + " отсутствуют тренировки.");
-            return null;
+        TreeMap<TimeOfDay, List<TrainingSession>> trainingSessionsForDay =
+                timetable.getOrDefault(dayOfWeek, new TreeMap<>());
+
+        List<TrainingSession> resultSessionsForDay = new ArrayList<>();
+
+        for (List<TrainingSession> sessionList : trainingSessionsForDay.values()) {
+            resultSessionsForDay.addAll(sessionList);
         }
-        return trainingSessionsForDay;
+
+        return resultSessionsForDay;
     }
 
     public List<TrainingSession> getTrainingSessionsForDayAndTime(DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
-        TreeMap<TimeOfDay, List<TrainingSession>> trainingSessionsForDay = timetable.get(dayOfWeek);
 
-        if (trainingSessionsForDay == null) {
-            System.out.println("В этот день " + dayOfWeek + " отсутствуют тренировки.");
-            return null;
-        }
+        TreeMap<TimeOfDay, List<TrainingSession>> scheduleForDay =
+                timetable.getOrDefault(dayOfWeek, new TreeMap<>());
 
-        List<TrainingSession> groupsAtTime = trainingSessionsForDay.get(timeOfDay);
 
-        if (groupsAtTime == null) {
-            System.out.println("В этот день " + dayOfWeek + " в это время " + timeOfDay + " отсутствуют тренировки.");
-            return null;
-        }
+        List<TrainingSession> resultSessionsForDayAndTime =
+                scheduleForDay.getOrDefault(timeOfDay, new ArrayList<>());
 
-        return groupsAtTime;
+        return resultSessionsForDayAndTime;
     }
 
-    public List<CounterOfTrainings> getCountByCoaches() {
+    public TreeSet <CounterOfTrainings> getCountByCoaches() {
+
+        TreeSet<CounterOfTrainings> counterOfTrainings = new TreeSet<>();
         Map<Coach, Integer> coachWeeklyTrainingsCount = new HashMap<>();
 
         for (Map.Entry<DayOfWeek, TreeMap<TimeOfDay, List<TrainingSession>>> entry : timetable.entrySet()) {
+
             TreeMap<TimeOfDay, List<TrainingSession>> dailySessions = entry.getValue();
 
             for (List<TrainingSession> trainingSessions : dailySessions.values()) {
@@ -70,13 +64,9 @@ public class Timetable {
             }
         }
 
-        List<CounterOfTrainings> counterOfTrainings = new ArrayList<>();
-
         for (Map.Entry<Coach, Integer> entry : coachWeeklyTrainingsCount.entrySet()) {
             counterOfTrainings.add(new CounterOfTrainings(entry.getKey(), entry.getValue()));
         }
-
-        Collections.sort(counterOfTrainings);
 
         return counterOfTrainings;
     }
