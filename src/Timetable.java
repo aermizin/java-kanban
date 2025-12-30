@@ -47,7 +47,7 @@ public class Timetable {
         return resultSessionsForDayAndTime;
     }
 
-    public TreeSet <CounterOfTrainings> getCountByCoaches() {
+    public TreeSet<CounterOfTrainings> getCountByCoaches() {
 
         TreeSet<CounterOfTrainings> counterOfTrainings = new TreeSet<>();
         Map<Coach, Integer> coachWeeklyTrainingsCount = new HashMap<>();
