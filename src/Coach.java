@@ -1,4 +1,6 @@
-public class Coach {
+import java.util.Objects;
+
+public class Coach implements Comparable<Coach> {
 
     //фамилия
     private String surname;
@@ -20,6 +22,23 @@ public class Coach {
                 ", name='" + name + '\'' +
                 ", middleName='" + middleName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Coach coach = (Coach) o;
+        return Objects.equals(surname, coach.surname) && Objects.equals(name, coach.name) && Objects.equals(middleName, coach.middleName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(surname, name, middleName);
+    }
+
+    @Override
+    public int compareTo(Coach other) {
+        return this.surname.compareTo(other.surname); // например, по фамилии
     }
 
     public String getSurname() {

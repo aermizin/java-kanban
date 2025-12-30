@@ -38,8 +38,14 @@ public class CounterOfTrainings implements Comparable<CounterOfTrainings> {
         return Objects.hash(coach, numberOfLessons);
     }
 
-    @Override
+    @ Override
     public int compareTo(CounterOfTrainings o) {
-        return o.numberOfLessons - this.numberOfLessons;
+        int lessonComparison = Integer.compare(o.numberOfLessons, this.numberOfLessons);
+
+        if (lessonComparison == 0) {
+            return coach.compareTo(o.coach); // дополнительная сортировка по тренерам
+        }
+
+        return lessonComparison;
     }
 }

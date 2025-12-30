@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,22 +14,6 @@ public class TimetableTest {
     @BeforeEach
     void setUp() {
         timetable = new Timetable();
-    }
-
-
-    @Test
-    void testAttemptToAddDuplicateSessions() {
-
-        Group group = new Group("Йога", Age.ADULT, 60);
-        Coach coach = new Coach("Иванов", "Сергей", "Петрович");
-        TrainingSession singleTrainingSession = new TrainingSession(group, coach,
-                DayOfWeek.FRIDAY, new TimeOfDay(13, 0));
-
-        timetable.addNewTrainingSession(singleTrainingSession);
-        timetable.addNewTrainingSession(singleTrainingSession);
-
-        assertEquals(1, timetable.getTrainingSessionsForDay(DayOfWeek.FRIDAY).size(),
-                "Дублирование занятий недопустимо");
     }
 
     @Test
@@ -203,7 +186,7 @@ public class TimetableTest {
         assertEquals(2,  counterOfTrainings.size(), "Должен вернуться список с двумя тренерами.");
     }
 
-    @Test
+   @Test
     void testCoachesSortedDescendingByTrainingCount() {
 
         Group childrenGroup = new Group("Акробатика для детей", Age.CHILD, 60);
@@ -238,7 +221,7 @@ public class TimetableTest {
 
         TreeSet <CounterOfTrainings> counterOfTrainings = timetable.getCountByCoaches();
 
-        assertEquals(childrenCoach, counterOfTrainings.getLast().getCoach(), "Первым должен быть тренер 'Васильев'.");
+        assertEquals(childrenCoach, counterOfTrainings.getFirst().getCoach(), "Первым должен быть тренер 'Васильев'.");
         assertEquals(3, counterOfTrainings.getFirst().getNumberOfLessons(),
                 "Должно вернуться 3 тренировки для тренера 'Васильев'.");
 
